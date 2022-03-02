@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FollowRead</string>
+    <string name="addbutton">addButton</string>
+    <string name="add">add</string>
+    <string name="number_of_pages">Number of pages</string>
+    <string name="book_author">Book Author</string>
+    <string name="book_title">Book Title</string>
 </resources>

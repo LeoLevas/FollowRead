@@ -10,8 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FollowRead">
         <activity
+            android:name=".AddActivity"
+            android:exported="false"
+            android:label="Add Book"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Book Library">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

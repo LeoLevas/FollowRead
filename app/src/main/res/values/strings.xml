@@ -6,4 +6,6 @@
     <string name="book_author">Book Author</string>
     <string name="book_title">Book Title</string>
     <string name="delete">Delete</string>
+    <string name="actual_position">Actual position</string>
+    <string name="jan_01_2022">JAN 01 2022</string>
 </resources>

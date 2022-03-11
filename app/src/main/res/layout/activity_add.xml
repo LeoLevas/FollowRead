@@ -13,7 +13,7 @@
         android:id="@+id/title_input"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="@string/book_title"
         android:inputType="textPersonName"

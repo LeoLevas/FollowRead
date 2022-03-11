@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    //get all var
     RecyclerView recyclerView;
     FloatingActionButton add_button;
 

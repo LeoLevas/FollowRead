@@ -21,42 +21,75 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Space android:id="@+id/dummy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_input2"/>
+
     <EditText
         android:id="@+id/author_input2"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/book_author"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_input2" />
+        app:layout_constraintTop_toBottomOf="@+id/dummy" />
 
     <EditText
         android:id="@+id/pages_input2"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/number_of_pages"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/title_input2"
+        app:layout_constraintTop_toBottomOf="@+id/dummy" />
+
+    <EditText
+        android:id="@+id/Position_input2"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/actual_position"
+        android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/author_input2" />
+
+    <Button
+        android:id="@+id/finishDate_button"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/jan_01_2022"
+        android:backgroundTint="#fff"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+
+        style="@android:style/Widget.DatePicker"
+        app:layout_constraintStart_toStartOf="@+id/pages_input2"
+        app:layout_constraintTop_toBottomOf="@+id/pages_input2"/>
+<!--        android:onClick="openDatePicker"-->
 
     <Button
         android:id="@+id/update_button"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/add"
-        android:textSize="25sp"
+        android:layout_marginTop="32dp"
+        android:text="update"
         android:textAllCaps="false"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pages_input2" />
+        app:layout_constraintTop_toBottomOf="@+id/Position_input2" />
 
     <Button
         android:id="@+id/delete_button"

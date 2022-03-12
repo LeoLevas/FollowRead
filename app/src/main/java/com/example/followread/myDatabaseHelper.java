@@ -13,13 +13,17 @@ class myDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "BookLibrary.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String TABLE_NAME = "my_library";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_TITLE = "book_title";
     private static final String COLUMN_AUTHOR = "book_author";
     private static final String COLUMN_PAGES = "book_pages";
+    private static final String COLUMN_POSITION = "book_position";
+    private static final String COLUMN_FINISHED_DAY = "book_finished_day";
+    private static final String COLUMN_FINISHED_MONTH = "book_finished_month";
+    private static final String COLUMN_FINISHED_YEAR = "book_finished_year";
 
 
     myDatabaseHelper(@Nullable Context context) {
@@ -34,7 +38,11 @@ class myDatabaseHelper extends SQLiteOpenHelper {
                     " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_TITLE + " TEXT, " +
                     COLUMN_AUTHOR + " TEXT, " +
-                    COLUMN_PAGES + " INTEGER);";
+                    COLUMN_PAGES + " INTEGER, " +
+                    COLUMN_POSITION + " INTEGER, " +
+                    COLUMN_FINISHED_DAY + " INTEGER, " +
+                    COLUMN_FINISHED_MONTH + " INTEGER, " +
+                    COLUMN_FINISHED_YEAR + " INTEGER);";
         db.execSQL(query);
     }
 
@@ -44,13 +52,17 @@ class myDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addBook(String title, String author, int pages) {
+    void addBook(String title, String author, int pages, int position,int finished_day, int finished_month, int finished_year) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_AUTHOR, author);
         cv.put(COLUMN_PAGES, pages);
+        cv.put(COLUMN_POSITION, position);
+        cv.put(COLUMN_FINISHED_DAY, finished_day);
+        cv.put(COLUMN_FINISHED_MONTH, finished_month);
+        cv.put(COLUMN_FINISHED_YEAR, finished_year);
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -70,12 +82,27 @@ class myDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void updateData(String row_id, String title, String author, String pages){
+    Cursor getElementFromDB(String element){
+        String query = "SELECT " + element +" FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    void updateData(String row_id, String title, String author, String pages, String position, String finished_day, String finished_month, String finished_year){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_AUTHOR, author);
         cv.put(COLUMN_PAGES, pages);
+        cv.put(COLUMN_POSITION, position);
+        cv.put(COLUMN_FINISHED_DAY, finished_day);
+        cv.put(COLUMN_FINISHED_MONTH, finished_month);
+        cv.put(COLUMN_FINISHED_YEAR, finished_year);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if(result == -1){

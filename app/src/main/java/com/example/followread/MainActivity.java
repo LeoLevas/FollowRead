@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton add_button;
 
     myDatabaseHelper myDB;
-    ArrayList<String> book_id, book_title, book_author, book_pages;
+    ArrayList<String> book_id, book_title, book_author, book_pages,
+    book_position, book_finished_day, book_finished_month, book_finished_year;
     CustomAdapter customAdapter;
 
     @Override
@@ -51,11 +52,16 @@ public class MainActivity extends AppCompatActivity {
         book_title = new ArrayList<>();
         book_author = new ArrayList<>();
         book_pages = new ArrayList<>();
+        book_position = new ArrayList<>();
+        book_finished_day = new ArrayList<>();
+        book_finished_month = new ArrayList<>();
+        book_finished_year = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(MainActivity.this, this, book_id, book_title, book_author,
-                book_pages);
+        customAdapter = new CustomAdapter(MainActivity.this, this,
+                book_id, book_title, book_author, book_pages, book_position,
+                book_finished_day,book_finished_month, book_finished_year);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
@@ -78,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
                 book_title.add(cursor.getString(1));
                 book_author.add(cursor.getString(2));
                 book_pages.add(cursor.getString(3));
+                book_position.add(cursor.getString(4));
+                book_finished_day.add(cursor.getString(5));
+                book_finished_month.add(cursor.getString(6));
+                book_finished_year.add(cursor.getString(7));
 
             }
         }

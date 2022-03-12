@@ -16,14 +16,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class UpdateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     private Button dateButton;
 
-    EditText title_input, author_input, pages_input;
-    Button update_button, delete_button;
+    EditText title_input, author_input, pages_input, position_input;
+    Button update_button, delete_button, finish_date_button;
 
-    String id, title, author, pages;
+    String id, title, author, pages, position, finished_day, finished_month, finished_year;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +37,11 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
         title_input = findViewById(R.id.title_input2);
         author_input = findViewById(R.id.author_input2);
         pages_input = findViewById(R.id.pages_input2);
+        position_input = findViewById(R.id.position_input2);
+
         update_button = findViewById(R.id.update_button);
         delete_button = findViewById(R.id.delete_button);
+        finish_date_button = findViewById(R.id.finishDate_button2);
 
         getAndSetIntentData();
 
@@ -47,7 +54,7 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
             @Override
             public void onClick(View view) {
                 myDatabaseHelper myDB = new myDatabaseHelper(UpdateActivity.this);
-                myDB.updateData(id, title, author, pages);
+                myDB.updateData(id, title, author, pages, position, finished_day, finished_month, finished_year);
             }
         });
 
@@ -58,7 +65,7 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
             }
         });
 
-        dateButton = findViewById(R.id.finishDate_button);
+        dateButton = findViewById(R.id.finishDate_button2);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -68,20 +75,42 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
         });
 
 
+
+
+
+
     }
     void getAndSetIntentData(){
-        if (getIntent().hasExtra("id") && getIntent().hasExtra("title") &&
-                getIntent().hasExtra("author") && getIntent().hasExtra("pages")){
+
+        //Extras are added to Intent in CustomAdapter.java
+        if (getIntent().hasExtra("id") &&
+                getIntent().hasExtra("title") &&
+                getIntent().hasExtra("author") &&
+                getIntent().hasExtra("pages") &&
+                getIntent().hasExtra("position") &&
+                getIntent().hasExtra("finished_day") &&
+                getIntent().hasExtra("finished_month") &&
+                getIntent().hasExtra("finished_year")){
+
             //Getting Data from intent
             id = getIntent().getStringExtra("id");
             title = getIntent().getStringExtra("title");
             author = getIntent().getStringExtra("author");
             pages = getIntent().getStringExtra("pages");
+            position = getIntent().getStringExtra("position");
+            finished_day = getIntent().getStringExtra("finished_day");
+            finished_month = getIntent().getStringExtra("finished_month");
+            finished_year = getIntent().getStringExtra("finished_year");
+
 
             //setting Intent Data
             title_input.setText(title);
             author_input.setText(author);
             pages_input.setText(pages);
+            position_input.setText(position);
+
+            finish_date_button.setHint(finished_day + "/" + finished_month + "/" + finished_year);
+
         }else{
             Toast.makeText(this,"No data.", Toast.LENGTH_SHORT).show();
         }
@@ -126,5 +155,8 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         String date = dayOfMonth + "/" + (month + 1) + "/" + year;
         dateButton.setHint(date);
+        finished_day = String.valueOf(dayOfMonth);
+        finished_month = String.valueOf(month);
+        finished_year = String.valueOf(year);
     }
 }

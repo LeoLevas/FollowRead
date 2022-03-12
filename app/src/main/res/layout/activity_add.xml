@@ -21,29 +21,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Space android:id="@+id/dummy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_input"/>
+
     <EditText
         android:id="@+id/author_input"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/book_author"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_input" />
+        app:layout_constraintTop_toBottomOf="@+id/dummy" />
 
     <EditText
         android:id="@+id/pages_input"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/number_of_pages"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/title_input"
+        app:layout_constraintTop_toBottomOf="@+id/dummy" />
+
+    <EditText
+        android:id="@+id/position_input"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/actual_position"
+        android:inputType="textPersonName"
+        style="@style/Widget.AppCompat.EditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/author_input" />
+
+    <Button
+        android:id="@+id/finishDate_button"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="01/01/2022"
+        android:backgroundTint="#fff"
+        app:strokeColor="#7C7C7C"
+        app:strokeWidth="2dp"
+        style="@android:style/Widget.DatePicker"
+        app:layout_constraintStart_toStartOf="@+id/pages_input"
+        app:layout_constraintTop_toBottomOf="@+id/pages_input"/>
 
     <Button
         android:id="@+id/add_button"
@@ -56,5 +88,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pages_input" />
+        app:layout_constraintTop_toBottomOf="@+id/position_input" />
 </androidx.constraintlayout.widget.ConstraintLayout>

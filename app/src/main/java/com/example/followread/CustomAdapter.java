@@ -18,16 +18,28 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
     Activity activity;
-    private ArrayList book_id, book_title, book_author, book_pages;
+    private ArrayList book_id, book_title, book_author, book_pages,
+            book_position, book_finished_day, book_finished_month, book_finished_year;
 
-    CustomAdapter(Activity activity, Context context, ArrayList book_id, ArrayList book_title, ArrayList book_author,
-                  ArrayList book_pages){
+    CustomAdapter(Activity activity, Context context,
+                  ArrayList book_id,
+                  ArrayList book_title,
+                  ArrayList book_author,
+                  ArrayList book_pages,
+                  ArrayList book_position,
+                  ArrayList book_finished_day,
+                  ArrayList book_finished_month,
+                  ArrayList book_finished_year){
         this.activity = activity;
         this.context = context;
         this.book_id = book_id;
         this.book_title = book_title;
         this.book_author = book_author;
         this.book_pages = book_pages;
+        this.book_position = book_position;
+        this.book_finished_day = book_finished_day;
+        this.book_finished_month = book_finished_month;
+        this.book_finished_year = book_finished_year;
     }
 
 
@@ -53,6 +65,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("title", String.valueOf(book_title.get(position)));
                 intent.putExtra("author", String.valueOf(book_author.get(position)));
                 intent.putExtra("pages", String.valueOf(book_pages.get(position)));
+                intent.putExtra("position", String.valueOf(book_position.get(position)));
+                intent.putExtra("finished_day", String.valueOf(book_finished_day.get(position)));
+                intent.putExtra("finished_month", String.valueOf(book_finished_month.get(position)));
+                intent.putExtra("finished_year", String.valueOf(book_finished_year.get(position)));
                 activity.startActivityForResult(intent,1);
             }
         });

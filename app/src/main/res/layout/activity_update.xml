@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dummy" />
 
     <EditText
-        android:id="@+id/Position_input2"
+        android:id="@+id/position_input2"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -64,11 +64,10 @@
         app:layout_constraintTop_toBottomOf="@+id/author_input2" />
 
     <Button
-        android:id="@+id/finishDate_button"
+        android:id="@+id/finishDate_button2"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:hint="@string/jan_01_2022"
         android:backgroundTint="#fff"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp"
@@ -76,7 +75,6 @@
         style="@android:style/Widget.DatePicker"
         app:layout_constraintStart_toStartOf="@+id/pages_input2"
         app:layout_constraintTop_toBottomOf="@+id/pages_input2"/>
-<!--        android:onClick="openDatePicker"-->
 
     <Button
         android:id="@+id/update_button"
@@ -89,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Position_input2" />
+        app:layout_constraintTop_toBottomOf="@+id/position_input2" />
 
     <Button
         android:id="@+id/delete_button"

@@ -13,7 +13,7 @@ class myDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "BookLibrary.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "my_library";
     private static final String COLUMN_ID = "_id";
@@ -35,7 +35,7 @@ class myDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query =
                 "CREATE TABLE " + TABLE_NAME +
-                    " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    " (" + COLUMN_ID + " INTEGER PRIMARY KEY, " +
                     COLUMN_TITLE + " TEXT, " +
                     COLUMN_AUTHOR + " TEXT, " +
                     COLUMN_PAGES + " INTEGER, " +
@@ -73,17 +73,6 @@ class myDatabaseHelper extends SQLiteOpenHelper {
 
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = null;
-        if (db != null){
-            cursor = db.rawQuery(query, null);
-        }
-        return cursor;
-    }
-
-    Cursor getElementFromDB(String element){
-        String query = "SELECT " + element +" FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;

@@ -16,8 +16,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 
 public class UpdateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
@@ -54,6 +58,19 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
             @Override
             public void onClick(View view) {
                 myDatabaseHelper myDB = new myDatabaseHelper(UpdateActivity.this);
+
+                ArrayList<String> values = new ArrayList<String>();
+
+                title = title_input.getText().toString().trim();
+                author = author_input.getText().toString().trim();
+                pages = pages_input.getText().toString().trim();
+                position = position_input.getText().toString().trim();
+
+/*                if(title.equals("")){title = String.valueOf(((TextInputLayout)title_input.getParent()).getHint()); }
+                if(author.equals("")){author = String.valueOf(((TextInputLayout)author_input.getParent()).getHint()); }
+                if(pages.equals("")){pages = String.valueOf(((TextInputLayout)pages_input.getParent()).getHint()); }
+                if(position.equals("")){position = String.valueOf(((TextInputLayout)position_input.getParent()).getHint()); }*/
+
                 myDB.updateData(id, title, author, pages, position, finished_day, finished_month, finished_year);
             }
         });
@@ -65,18 +82,13 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
             }
         });
 
-        dateButton = findViewById(R.id.finishDate_button2);
-        dateButton.setOnClickListener(new View.OnClickListener() {
+        finish_date_button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();
             }
         });
-
-
-
-
 
 
     }
@@ -102,14 +114,13 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
             finished_month = getIntent().getStringExtra("finished_month");
             finished_year = getIntent().getStringExtra("finished_year");
 
-
             //setting Intent Data
             title_input.setText(title);
             author_input.setText(author);
             pages_input.setText(pages);
             position_input.setText(position);
 
-            finish_date_button.setHint(finished_day + "/" + finished_month + "/" + finished_year);
+            finish_date_button.setHint(finished_day + "/" + finished_month /*String.valueOf(Integer.parseInt(finished_month) + 1)*/ + "/" + finished_year);
 
         }else{
             Toast.makeText(this,"No data.", Toast.LENGTH_SHORT).show();
@@ -153,8 +164,9 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        String date = dayOfMonth + "/" + (month + 1) + "/" + year;
-        dateButton.setHint(date);
+        month += 1;
+        String date = dayOfMonth + "/" + month + "/" + year;
+        finish_date_button.setHint(date);
         finished_day = String.valueOf(dayOfMonth);
         finished_month = String.valueOf(month);
         finished_year = String.valueOf(year);

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid
+                android:color="#BFffffff"/>
+            <!--<stroke
+
+                android:color="#BF000000"
+                android:width="5dp"
+                />-->
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>
+</selector>
+
+<!--
+    Two hexadecimal characters can be appended to any hexadecimal color code. The first two characters in an 8-digit hex color code represents its opacity in Android.
+
+    The two hexadecimal characters can range from 00 to FF. For example,
+
+    Normal opaque black hex- "#000000"
+    Fully transparent - "#00000000"
+    Fully opaque - "#FF000000"
+    50% transparent - "#7F000000"
+
+    This way you can change any color to any level of transparency.
+
+    To find the hexadecimal prefix from a percentage:
+
+    Divide the percentage number by 100 and multiply by 255 to get the decimal value. Convert the decimal to hexadecimal here.
+
+    For example, for 50%, 50/100 * 255 = 127. Using the link we get hexadecimal value 7F.
+-->

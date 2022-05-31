@@ -6,101 +6,171 @@
     android:layout_height="match_parent"
     tools:context=".AddActivity"
     tools:ignore="AutoFill"
-    android:padding="30dp"
     >
 
-    <EditText
-        android:id="@+id/title_input2"
+    <ImageView
+        android:id="@+id/bookImage2"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="150dp"
-        android:ems="10"
-        android:hint="@string/book_title"
-        android:inputType="textPersonName"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Space android:id="@+id/dummy"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_input2"/>
+    </ImageView>
 
-    <EditText
-        android:id="@+id/author_input2"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/book_author"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dummy" />
-
-    <EditText
-        android:id="@+id/pages_input2"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/number_of_pages"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/title_input2"
-        app:layout_constraintTop_toBottomOf="@+id/dummy" />
-
-    <EditText
-        android:id="@+id/position_input2"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/actual_position"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/author_input2" />
-
-    <Button
-        android:id="@+id/finishDate_button2"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#fff"
-        app:strokeColor="@color/black"
-        app:strokeWidth="2dp"
-
-        style="@android:style/Widget.DatePicker"
-        app:layout_constraintStart_toStartOf="@+id/pages_input2"
-        app:layout_constraintTop_toBottomOf="@+id/pages_input2"/>
-
-    <Button
-        android:id="@+id/update_button"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="32dp"
-        android:text="update"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/position_input2" />
+        android:layout_height="match_parent"
+        android:layout_margin="30dp">
 
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/delete"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        android:backgroundTint="#880000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.733"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update_button" />
+        <EditText
+            android:id="@+id/title_input2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"
+            android:ems="10"
+            android:hint="@string/book_title"
+            android:inputType="textPersonName"
+            android:background="@drawable/edittext_bg"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Space android:id="@+id/dummy"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_input2"/>
+
+        <EditText
+            android:id="@+id/author_input2"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/book_author"
+            android:inputType="textPersonName"
+            android:background="@drawable/edittext_bg"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dummy" />
+
+        <EditText
+            android:id="@+id/pages_input2"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/number_of_pages"
+            android:inputType="textPersonName"
+            android:background="@drawable/edittext_bg"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/finishDate_button2"
+            app:layout_constraintTop_toBottomOf="@+id/finishDate_button2" />
+
+        <EditText
+            android:id="@+id/pages_position_input2"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/actual_position"
+            android:inputType="textPersonName"
+            android:background="@drawable/edittext_bg"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/author_input2" />
+
+        <Button
+            android:id="@+id/finishDate_button2"
+            style="@android:style/Widget.DatePicker"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#fff"
+            android:hint="01/01/2022"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dummy"
+            app:strokeColor="#7C7C7C"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/addImage2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_bg"
+            app:backgroundTint="#FFFF"
+            android:textColor="@color/black"
+            android:text="@string/add_image"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chapter_position_input2" />
+
+        <Button
+            android:id="@+id/update_button"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/button_bg"
+            app:backgroundTint="#FFFF"
+            android:textColor="@color/black"
+            android:text="@string/update"
+            android:textAllCaps="false"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addImage2" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/delete"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="25sp"
+            android:backgroundTint="#880000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.733"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/update_button" />
+
+        <EditText
+            android:id="@+id/chapter_input2"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/number_of_chapter"
+            android:background="@drawable/edittext_bg"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/pages_input2"
+            app:layout_constraintTop_toBottomOf="@+id/pages_input2"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <EditText
+            android:id="@+id/chapter_position_input2"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/actual_chapter"
+            android:background="@drawable/edittext_bg"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/pages_position_input2"
+            app:layout_constraintTop_toBottomOf="@+id/pages_position_input2"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

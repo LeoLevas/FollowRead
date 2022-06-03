@@ -1,5 +1,6 @@
 package com.example.followread;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 
 import java.io.ByteArrayInputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 class myDatabaseHelper extends SQLiteOpenHelper {
@@ -42,6 +44,12 @@ class myDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_EXPECTED_CHAP_TODAY = "book_expect_chap_today";
     private static final String COLUMN_LAST_ENTRY_PAGE = "book_last_entry_page";
     private static final String COLUMN_LAST_ENTRY_CHAP = "book_last_entry_chap";
+
+    private static final String COLUMN_HIGHLIGHT = "highlight_content";
+    private static final String COLUMN_HIGHLIGHT_TITLE = "highlight_title";
+    private static final String COLUMN_HIGHLIGHT_PAGE = "highlight_page";
+    private static final String COLUMN_HIGHLIGHT_CHAPTER = "highlight_chapter";
+    private static final String COLUMN_HIGHLIGHT_IMAGE = "highlight_image";
 
 
     myDatabaseHelper(@Nullable Context context) {
@@ -80,6 +88,7 @@ class myDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    @SuppressLint("Range")
     void addBook(String title, String author, int pages, int position, int chapter, int chapter_position,
                  int finished_day, int finished_month, int finished_year, byte[] book_cover,
                  String last_entry_day, String last_entry_month, String last_entry_year, int expected_page_today, int expected_chap_today,
@@ -110,6 +119,8 @@ class myDatabaseHelper extends SQLiteOpenHelper {
         } else {
             Toast.makeText(context, "Added successfully!", Toast.LENGTH_SHORT).show();
         }
+
+        createHighlightDB(title, db);
     }
 
     Cursor readAllData() {
@@ -180,18 +191,92 @@ class myDatabaseHelper extends SQLiteOpenHelper {
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
     }
 
+    void deleteBookTable(String table_name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        table_name = table_name.replaceAll("\\s+", "_");
+
+        db.execSQL("DROP TABLE " + table_name);
+    }
+
     void deleteOneRow(String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
-        if (result == -1){
-            Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
+
+        Cursor cursor = readAllData();
+
+
+        int lastID = 0;
+        if(cursor.moveToLast()){
+            lastID = cursor.getInt(0);
+        }
+
+        if(Integer.parseInt(row_id) == lastID) {
+            long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
+            if (result == -1) {
+                Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            int nextID = 0;
+            ContentValues cv = new ContentValues();
+            cursor.moveToPosition(Integer.parseInt(row_id) - 1);
+            cursor.moveToNext();
+            nextID = cursor.getInt(0);
+            cv.put(COLUMN_TITLE, cursor.getString(1));
+            cv.put(COLUMN_AUTHOR, cursor.getString(2));
+            cv.put(COLUMN_PAGES, cursor.getInt(3));
+            cv.put(COLUMN_POSITION, cursor.getInt(4));
+            cv.put(COLUMN_CHAPTER, cursor.getInt(5));
+            cv.put(COlUMN_CHAPTER_POSITION, cursor.getInt(6));
+            cv.put(COLUMN_FINISHED_DAY, cursor.getInt(7));
+            cv.put(COLUMN_FINISHED_MONTH, cursor.getInt(8));
+            cv.put(COLUMN_FINISHED_YEAR, cursor.getInt(9));
+            cv.put(COLUMN_LAST_ENTRY_DAY, cursor.getString(10));
+            cv.put(COLUMN_LAST_ENTRY_MONTH, cursor.getString(11));
+            cv.put(COLUMN_LAST_ENTRY_YEAR, cursor.getString(12));
+            cv.put(COLUMN_COVER, cursor.getBlob(13));
+            cv.put(COLUMN_EXPECTED_PAGE_TODAY, cursor.getString(14));
+            cv.put(COLUMN_EXPECTED_CHAP_TODAY, cursor.getString(15));
+            cv.put(COLUMN_LAST_ENTRY_PAGE, cursor.getString(16));
+            cv.put(COLUMN_LAST_ENTRY_CHAP, cursor.getString(17));
+            cursor.close();
+            long update = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+            deleteOneRow(String.valueOf(nextID));
         }
     }
 
     void deleteAllData(){
          SQLiteDatabase db = this.getWritableDatabase();
          db.execSQL("DELETE FROM " + TABLE_NAME);
+    }
+
+    void createHighlightDB(String title, SQLiteDatabase db){
+        title = title.replaceAll("\\s+", "_");
+        String query = "CREATE TABLE IF NOT EXISTS " + title +
+                " (" + COLUMN_ID +" INTEGER PRIMARY KEY, " +
+                COLUMN_HIGHLIGHT + " TEXT, " +
+                COLUMN_HIGHLIGHT_PAGE + " TEXT, " +
+                COLUMN_HIGHLIGHT_TITLE + " TEXT, " +
+                COLUMN_HIGHLIGHT_CHAPTER + " TEXT, " +
+                COLUMN_HIGHLIGHT_IMAGE + " BLOB);";
+        db.execSQL(query);
+    }
+
+    public ArrayList<String> IdArray() {
+        ArrayList<String> stringList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT rowid FROM " + TABLE_NAME;
+        Cursor c = db.rawQuery(selectQuery, null);
+        if (c != null) {
+            c.moveToFirst();
+            while (c.isAfterLast() == false) {
+                String id = (c.getString(0));
+
+                stringList.add(id);
+                c.moveToNext();
+            }
+        }
+        return stringList;
     }
 }

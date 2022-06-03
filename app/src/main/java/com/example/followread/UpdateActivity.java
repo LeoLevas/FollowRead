@@ -55,6 +55,9 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
     Button update_button, delete_button, finish_date_button, addImage;
 
     String id, title, author, pages, page_position, chapter, chapter_position, finished_day, finished_month, finished_year;
+    String new_title, new_author, new_pages, new_page_position, new_chapter, new_chapter_position,
+            new_finished_day, new_finised_month, new_finished_year, new_book_cover, new_last_entry_day, new_last_entry_month, new_last_entry_year,
+            new_expected_page, new_expected_chap, new_last_entry_page, new_last_entry_chap;
     byte[] bookImage_bytes;
     ImageView bookImageView;
 
@@ -143,19 +146,8 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
 
     }
     void getAndSetIntentData(){
-
         //Extras are added to Intent in CustomAdapter.java
-        if (getIntent().hasExtra("id") &&
-                getIntent().hasExtra("title") &&
-                getIntent().hasExtra("author") &&
-                getIntent().hasExtra("pages") &&
-                getIntent().hasExtra("pages_position") &&
-                getIntent().hasExtra("chapter") &&
-                getIntent().hasExtra("chapter_position") &&
-                getIntent().hasExtra("finished_day") &&
-                getIntent().hasExtra("finished_month") &&
-                getIntent().hasExtra("finished_year")){
-
+        try {
             //Getting Data from intent
             id = getIntent().getStringExtra("id");
             title = getIntent().getStringExtra("title");
@@ -179,7 +171,7 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
 
             finish_date_button.setHint(finished_day + "/" + finished_month /*String.valueOf(Integer.parseInt(finished_month) + 1)*/ + "/" + finished_year);
 
-        }else{
+        }catch (Exception ex){
             Toast.makeText(this,"No data.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -193,6 +185,7 @@ public class UpdateActivity extends AppCompatActivity implements DatePickerDialo
             public void onClick(DialogInterface dialogInterface, int i) {
                 myDatabaseHelper myDB = new myDatabaseHelper(UpdateActivity.this);
                 myDB.deleteOneRow(id);
+                myDB.deleteBookTable(title);
                 finish();
             }
         });

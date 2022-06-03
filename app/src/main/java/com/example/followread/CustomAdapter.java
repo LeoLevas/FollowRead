@@ -189,6 +189,33 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                             case R.id.modify:
                                 //handle menu1 click
                                 Intent intent = new Intent(context, UpdateActivity.class);
+                                /*String currentId = String.valueOf(book_id.get(position));
+                                String lastId = String.valueOf(book_id.get(book_id.size() - 1));
+                                boolean isLast = true;
+                                if (!lastId.equals(currentId)){
+                                    isLast = false;
+                                }
+                                if(!isLast){
+                                    Bundle extras = new Bundle();
+                                    extras.putString("new_title", String.valueOf(book_title.get(position + 1)));
+                                    extras.putString("new_author", String.valueOf(book_author.get(position + 1)));
+                                    extras.putString("new_pages", String.valueOf(book_pages.get(position + 1)));
+                                    extras.putString("new_pages_position", String.valueOf(book_page_position.get(position + 1)));
+                                    extras.putString("new_chapter", String.valueOf(book_chapter.get(position + 1)));
+                                    extras.putString("new_chapter_position", String.valueOf(book_chapter_position.get(position + 1)));
+                                    extras.putString("new_finished_day", String.valueOf(book_finished_day.get(position + 1)));
+                                    extras.putString("new_finished_month", String.valueOf(book_finished_month.get(position + 1)));
+                                    extras.putString("new_finished_year", String.valueOf(book_finished_year.get(position + 1)));
+                                    extras.putString("new_book_cover", String.valueOf(book_cover.get(position + 1)));
+                                    extras.putString("new_last_entry_day", String.valueOf(book_last_entry_day.get(position + 1)));
+                                    extras.putString("new_last_entry_month", String.valueOf(book_last_entry_month.get(position + 1)));
+                                    extras.putString("new_last_entry_year", String.valueOf(book_last_entry_year.get(position + 1)));
+                                    extras.putString("new_expected_page", String.valueOf(book_expected_page_today.get(position + 1)));
+                                    extras.putString("new_expected_chap", String.valueOf(book_expected_chap_today.get(position + 1)));
+                                    extras.putString("new_last_entry_page", String.valueOf(book_last_entry_page.get(position + 1)));
+                                    extras.putString("new_last_entry_chap", String.valueOf(book_last_entry_chap.get(position + 1)));
+                                    intent.putExtras(extras);
+                                }*/
                                 intent.putExtra("id", String.valueOf(book_id.get(position)));
                                 intent.putExtra("title", String.valueOf(book_title.get(position)));
                                 intent.putExtra("author", String.valueOf(book_author.get(position)));
@@ -200,6 +227,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                                 intent.putExtra("finished_month", String.valueOf(book_finished_month.get(position)));
                                 intent.putExtra("finished_year", String.valueOf(book_finished_year.get(position)));
                                 intent.putExtra("book_cover", String.valueOf(book_cover.get(position)));
+                                //intent.putExtra("is_last", isLast);
                                 activity.startActivityForResult(intent,1);
                                 return true;
                             case R.id.progress:

@@ -115,11 +115,11 @@
             android:id="@+id/finished_reading_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="200dp"
+            android:layout_marginTop="24dp"
             android:text="finished_reading_progress"
-            app:layout_constraintBottom_toBottomOf="@id/textZone"
             app:layout_constraintEnd_toEndOf="@id/textZone"
-            app:layout_constraintStart_toStartOf="@id/textZone" />
+            app:layout_constraintStart_toStartOf="@id/textZone"
+            app:layout_constraintTop_toBottomOf="@+id/complete_progressBar" />
 
         <TextView
             android:id="@+id/total_pages_progress"
@@ -211,6 +211,26 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/button_bg"
             android:text="@string/update"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:backgroundTint="#FFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_highlights" />
+
+        <Button
+            android:id="@+id/add_highlights"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/button_bg"
+            android:text="add highlights"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="25sp"

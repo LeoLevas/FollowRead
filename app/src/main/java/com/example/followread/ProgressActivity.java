@@ -44,7 +44,7 @@ public class ProgressActivity extends AppCompatActivity{
 
     LocalDate actualDate, FinishDate, last_entry_date;
 
-    Button update_button;
+    Button update_button, add_highlights_button;
 
     Integer pageDoneToday, chapDoneToday, pageCompleteAt, chapCompleteAt;
     Float advancementPage, advancementChap;
@@ -74,6 +74,15 @@ public class ProgressActivity extends AppCompatActivity{
         complete_progressBar = findViewById(R.id.complete_progressBar);
         page_obj_bar = findViewById(R.id.page_daily_obj_bar);
         chapter_obj_bar = findViewById(R.id.chap_daily_obj_bar);
+
+        add_highlights_button = findViewById(R.id.add_highlights);
+
+        add_highlights_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         //region but image in background
         cover_view = findViewById(R.id.cover_progress);

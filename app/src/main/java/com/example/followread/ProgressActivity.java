@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -80,7 +81,9 @@ public class ProgressActivity extends AppCompatActivity{
         add_highlights_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(ProgressActivity.this, HighlightsActivity.class);
+                intent.putExtra("title", title);
+                startActivity(intent);
             }
         });
 

@@ -43,6 +43,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private String FinishedDateString;
     LocalDate actualDate, FinishDate, last_entry_date;
 
+
+
     CustomAdapter(Activity activity, Context context,
                   ArrayList book_id,
                   ArrayList book_title,
@@ -84,6 +86,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.book_expected_chap_today = book_expected_chap_today;
         this.book_last_entry_page = book_last_entry_page;
         this.book_last_entry_chap = book_last_entry_chap;
+    }
+
+    private ArrayList HL_id, HL_content, Hl_page, HL_chapter, HL_title, HL_cover;
+
+
+    CustomAdapter(Activity activity, Context context,
+                  ArrayList HL_id,
+                  ArrayList HL_content,
+                  ArrayList HL_page,
+                  ArrayList HL_chapter,
+                  ArrayList HL_title,
+                  ArrayList HL_cover){
+        this.activity = activity;
+        this.context = context;
+        this.HL_id = HL_id;
+        this.HL_content = HL_content;
+        this.Hl_page = HL_page;
+        this.HL_chapter = HL_chapter;
+        this.HL_title = HL_title;
+        this.HL_cover = HL_cover;
     }
 
     @NonNull
@@ -189,33 +211,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                             case R.id.modify:
                                 //handle menu1 click
                                 Intent intent = new Intent(context, UpdateActivity.class);
-                                /*String currentId = String.valueOf(book_id.get(position));
-                                String lastId = String.valueOf(book_id.get(book_id.size() - 1));
-                                boolean isLast = true;
-                                if (!lastId.equals(currentId)){
-                                    isLast = false;
-                                }
-                                if(!isLast){
-                                    Bundle extras = new Bundle();
-                                    extras.putString("new_title", String.valueOf(book_title.get(position + 1)));
-                                    extras.putString("new_author", String.valueOf(book_author.get(position + 1)));
-                                    extras.putString("new_pages", String.valueOf(book_pages.get(position + 1)));
-                                    extras.putString("new_pages_position", String.valueOf(book_page_position.get(position + 1)));
-                                    extras.putString("new_chapter", String.valueOf(book_chapter.get(position + 1)));
-                                    extras.putString("new_chapter_position", String.valueOf(book_chapter_position.get(position + 1)));
-                                    extras.putString("new_finished_day", String.valueOf(book_finished_day.get(position + 1)));
-                                    extras.putString("new_finished_month", String.valueOf(book_finished_month.get(position + 1)));
-                                    extras.putString("new_finished_year", String.valueOf(book_finished_year.get(position + 1)));
-                                    extras.putString("new_book_cover", String.valueOf(book_cover.get(position + 1)));
-                                    extras.putString("new_last_entry_day", String.valueOf(book_last_entry_day.get(position + 1)));
-                                    extras.putString("new_last_entry_month", String.valueOf(book_last_entry_month.get(position + 1)));
-                                    extras.putString("new_last_entry_year", String.valueOf(book_last_entry_year.get(position + 1)));
-                                    extras.putString("new_expected_page", String.valueOf(book_expected_page_today.get(position + 1)));
-                                    extras.putString("new_expected_chap", String.valueOf(book_expected_chap_today.get(position + 1)));
-                                    extras.putString("new_last_entry_page", String.valueOf(book_last_entry_page.get(position + 1)));
-                                    extras.putString("new_last_entry_chap", String.valueOf(book_last_entry_chap.get(position + 1)));
-                                    intent.putExtras(extras);
-                                }*/
                                 intent.putExtra("id", String.valueOf(book_id.get(position)));
                                 intent.putExtra("title", String.valueOf(book_title.get(position)));
                                 intent.putExtra("author", String.valueOf(book_author.get(position)));

@@ -11,8 +11,15 @@
     <string name="add_image">Add image</string>
     <string name="number_of_chapter">Number of chapter</string>
     <string name="actual_chapter">Actual chapter position</string>
-    <string name="update">update</string>
+    <string name="update">Update</string>
     <string name="_8942">⋮</string>
     <string name="modify_data">Modify data</string>
     <string name="update_progress">Update progress</string>
+    <string name="chapter_name">Chapter name</string>
+    <string name="add_new_highlights">Add new highlights</string>
+    <string name="highlight_title">Highlight title</string>
+    <string name="highlight_chapter">Highlight chapter</string>
+    <string name="highlight_content">Highlight content</string>
+    <string name="highlight_page">Highlight page</string>
+    <string name="add_new_chapter">Add new chapter</string>
 </resources>

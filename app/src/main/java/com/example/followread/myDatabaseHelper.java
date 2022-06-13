@@ -96,6 +96,7 @@ class myDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        //region put content values
         cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_AUTHOR, author);
         cv.put(COLUMN_PAGES, pages);
@@ -113,6 +114,7 @@ class myDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_EXPECTED_CHAP_TODAY, expected_chap_today);
         cv.put(COLUMN_LAST_ENTRY_PAGE, last_entry_page);
         cv.put(COLUMN_LAST_ENTRY_CHAP, last_entry_chap);
+        //endregion
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1) {
             Toast.makeText(context, "Failed", Toast .LENGTH_SHORT).show();
@@ -122,6 +124,24 @@ class myDatabaseHelper extends SQLiteOpenHelper {
 
         createHighlightDB(title, db);
     }
+
+    void addHighlight(String table_name, String title, String chapter, String page, String content){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_HIGHLIGHT, content);
+        cv.put(COLUMN_HIGHLIGHT_CHAPTER, chapter);
+        cv.put(COLUMN_HIGHLIGHT_PAGE, page);
+        cv.put(COLUMN_HIGHLIGHT_TITLE, title);
+        cv.put(COLUMN_HIGHLIGHT_IMAGE, (byte[]) null);
+
+        long result = db.insert(table_name, null, cv);
+        if (result == -1) {
+            Toast.makeText(context, "Failed", Toast .LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Added highlight successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;

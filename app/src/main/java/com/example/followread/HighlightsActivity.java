@@ -13,19 +13,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 import android.widget.AutoCompleteTextView;
-import android.widget.MultiAutoCompleteTextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HighlightsActivity extends Activity {
+
+    private List<highLights_Item> itemList;
     myDatabaseHelper myDB;
     private Context context;
     Button popup_add_HL, add_HL;
@@ -57,13 +58,18 @@ public class HighlightsActivity extends Activity {
         hl_chapter = new ArrayList<>();
         hl_title = new ArrayList<>();
 
+        itemList = new ArrayList<>();
+
         table_name = getIntent().getStringExtra("title");
         table_name = table_name.replaceAll("\\s+", "_");
 
-        storeDataInArrays(table_name);
+        storeDataInList(table_name);
+        //storeDataInArrays(table_name);
+        itemList = sortListByTitle(itemList);
 
-        customAdapterHL = new CustomAdapterHL(HighlightsActivity.this, this,
-                hl_id, hl_content, hl_page, hl_chapter, hl_title);
+//        customAdapterHL = new CustomAdapterHL(HighlightsActivity.this, this,
+//                hl_id, hl_content, hl_page, hl_chapter, hl_title);
+        customAdapterHL = new CustomAdapterHL(HighlightsActivity.this, this, itemList);
         recyclerView.setAdapter(customAdapterHL);
         recyclerView.setLayoutManager(new LinearLayoutManager(HighlightsActivity.this));
 
@@ -119,6 +125,41 @@ public class HighlightsActivity extends Activity {
                 });
             }
         });
+    }
+
+    private void storeDataInList(String table_name) {
+        SQLiteDatabase db = myDB.getReadableDatabase();
+        Cursor cursor = readHLSData(db, table_name);
+        if(cursor.getCount() == 0){
+            Toast.makeText(this, "No highlights at the moment.", Toast.LENGTH_SHORT).show();
+        }else{
+            while (cursor.moveToNext()){
+                String hl_id, hl_content, hl_page, hl_chapter, hl_title;
+
+                hl_id = cursor.getString(0);
+                hl_content =cursor.getString(1);
+                hl_page = cursor.getString(2);
+                hl_title = cursor.getString(3);
+                hl_chapter = cursor.getString(4);
+                itemList.add(new highLights_Item(hl_page, hl_chapter, hl_id, hl_title, hl_content));
+            }
+        }
+    }
+
+    private List<highLights_Item> sortListByTitle(List<highLights_Item> itemList){
+        for(int i = 0; i < itemList.size(); i++){
+            String actualTitle = itemList.get(i).getHLTitle();
+            if (i >= 1){
+                for( int x = 0; x < i; x++){
+                    if((itemList.get(x).getHLTitle()).equals(actualTitle)){
+                        highLights_Item toMove = itemList.get(i);
+                        itemList.set(i, itemList.get(x+1));
+                        itemList.set(x+1, toMove);
+                    }
+                }
+            }
+        }
+        return itemList;
     }
 
     void storeDataInArrays(String table_name){
